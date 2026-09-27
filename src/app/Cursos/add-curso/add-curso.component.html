@@ -1,0 +1,56 @@
+<div class="container mt-4" style="max-width: 500px;">
+  <h2>Alta de curso</h2>
+
+  <form [formGroup]="form" (ngSubmit)="guardar()">
+
+    <div class="mb-3">
+      <label class="form-label">Ciclo lectivo</label>
+      <input type="text" class="form-control" formControlName="ciclo_lectivo" placeholder="2026">
+      <div class="text-danger" *ngIf="form.get('ciclo_lectivo')?.invalid && form.get('ciclo_lectivo')?.touched">
+        El ciclo lectivo es obligatorio.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Grado</label>
+      <input type="text" class="form-control" formControlName="grado" placeholder="1">
+      <div class="text-danger" *ngIf="form.get('grado')?.invalid && form.get('grado')?.touched">
+        El grado es obligatorio.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">División</label>
+      <input type="text" class="form-control" formControlName="division" placeholder="A">
+      <div class="text-danger" *ngIf="form.get('division')?.invalid && form.get('division')?.touched">
+        La división es obligatoria.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Turno</label>
+      <select class="form-select" formControlName="turno">
+        <option value="">Seleccioná...</option>
+        <option value="MANANA">Mañana</option>
+        <option value="TARDE">Tarde</option>
+      </select>
+      <div class="text-danger" *ngIf="form.get('turno')?.invalid && form.get('turno')?.touched">
+        El turno es obligatorio.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Cupo máximo</label>
+      <input type="text" class="form-control" formControlName="cupo_maximo" placeholder="30">
+      <div class="text-danger" *ngIf="form.get('cupo_maximo')?.invalid && form.get('cupo_maximo')?.touched">
+        El cupo máximo es obligatorio.
+      </div>
+    </div>
+
+    <div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="enviando">
+      {{ enviando ? 'Guardando...' : 'Guardar' }}
+    </button>
+  </form>
+</div>

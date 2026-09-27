@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light px-3 d-flex justify-content-between">
+  <div>
+    <ng-container *ngIf="loggedIn$ | async">
+      <a routerLink="/alumnoForm" class="me-3" *ngIf="isAdmin">Nuevo alumno</a>
+      <a routerLink="/listAlumno" class="me-3">Listado de alumnos</a>
+      <a routerLink="/cursoForm" class="me-3" *ngIf="isAdmin">Nuevo curso</a>
+      <a routerLink="/listCurso" class="me-3">Listado de cursos</a>
+      <a routerLink="/personalForm" class="me-3" *ngIf="isAdmin">Nuevo personal</a>
+      <a routerLink="/listPersonal" class="me-3">Listado de personal</a>
+      <a routerLink="/register" *ngIf="isAdmin">Registrar usuario</a>
+    </ng-container>
+  </div>
+
+  <div>
+    <ng-container *ngIf="loggedIn$ | async; else linkLogin">
+      <span class="me-3 text-muted">{{ username }}</span>
+      <button class="btn btn-outline-secondary btn-sm" (click)="salir()" [disabled]="cerrandoSesion">Salir</button>
+    </ng-container>
+    <ng-template #linkLogin>
+      <a routerLink="/login">Ingresar</a>
+    </ng-template>
+  </div>
+</nav>
+
+<app-loading-overlay *ngIf="cerrandoSesion" mensaje="Cerrando sesión..."></app-loading-overlay>
+
+<!-- The matching routed component will render inside this element -->
+<router-outlet></router-outlet>
